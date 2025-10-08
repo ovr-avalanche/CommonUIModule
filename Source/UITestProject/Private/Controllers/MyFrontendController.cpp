@@ -1,12 +1,12 @@
 // Avalanche All Rights Reserved
 
 
-#include "Controllers/MyPlayerController.h"
+#include "Controllers/MyFrontendController.h"
 
 #include "Camera/CameraActor.h"
 #include "Kismet/GameplayStatics.h"
 
-void AMyPlayerController::OnPossess(APawn* aPawn)
+void AMyFrontendController::OnPossess(APawn* aPawn)
 {           
     Super::OnPossess(aPawn);
     TArray<AActor*> Cameras;

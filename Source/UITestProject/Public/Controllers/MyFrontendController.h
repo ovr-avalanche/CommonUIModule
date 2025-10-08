@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
-#include "MyPlayerController.generated.h"
+#include "MyFrontendController.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class UITESTPROJECT_API AMyPlayerController : public APlayerController
+class UITESTPROJECT_API AMyFrontendController : public APlayerController
 {
 	GENERATED_BODY()
 	
