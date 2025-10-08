@@ -23,11 +23,16 @@ private:
 	//-----from UUserWidget-----------------//
 	virtual void NativePreConstruct() override; // called when making changes in the editor in the widget blueprint
 	//-----from UUserWidget-----------------//
+
+	//-----from UCommonButtonBase-----------------//
+	virtual void NativeOnCurrentTextStyleChanged() override;
+	//-----from UCommonButtonBase-----------------//
+
 	
-	//------------bound widgets-----------------//
+	//**************** bound widgets *****************//
 	UPROPERTY(meta = (BindWidgetOptional))
 	class UCommonTextBlock* CommonTextBlock_ButtonText;
-	//------------bound widgets-----------------//
+	//**************** bound widgets *****************//
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Frontend Button", meta = (AllowPrivateAccess = "true"))
 	FText ButtonText;
