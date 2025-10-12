@@ -10,14 +10,22 @@
 class UWidget_PrimaryLayout;
 struct FGameplayTag;
 class UWidget_ActivatableBase;
+class UFrontendCommonButtonBase;
 
 enum class EAsyncPushWidgetState : uint8
 {
 	OnCreatedBeforePush,
 	AfterPush
 };
+
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnButtonDescriptionTextUpdatedDelegate,UFrontendCommonButtonBase*,BroadcastingButton,FText,DescriptionText);
+
 /**
- * 
+ * @class UFrontendUISubsystem
+ * @brief The UFrontendUISubsystem class is a subsystem designed to handle and manage frontend UI-related functionalities.
+ * It extends UGameInstanceSubsystem to provide specific functionality for managing UI, such as registering layout widgets
+ * and pushing soft widgets to the UI stack asynchronously.
  */
 UCLASS()
 class UITESTPROJECT_API UFrontendUISubsystem : public UGameInstanceSubsystem
@@ -36,6 +44,9 @@ public:
 
 	void PushSoftWidgetToStackAsync(const FGameplayTag& InWidgetStackTag,TSoftClassPtr<UWidget_ActivatableBase> InSoftWidgetClass, TFunction<void(EAsyncPushWidgetState, UWidget_ActivatableBase*)> AysncPushStateCallback);
 
+	UPROPERTY(BlueprintAssignable)
+	FOnButtonDescriptionTextUpdatedDelegate OnButtonDescriptionTextUpdated;
+	
 private:
 	UPROPERTY(Transient)
 	UWidget_PrimaryLayout* CreatedPrimaryLayout;

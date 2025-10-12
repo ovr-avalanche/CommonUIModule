@@ -26,6 +26,8 @@ private:
 
 	//-----from UCommonButtonBase-----------------//
 	virtual void NativeOnCurrentTextStyleChanged() override;
+	virtual void NativeOnHovered() override;
+	virtual void NativeOnUnhovered() override;
 	//-----from UCommonButtonBase-----------------//
 
 	
