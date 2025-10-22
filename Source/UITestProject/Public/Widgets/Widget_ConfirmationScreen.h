@@ -50,6 +50,10 @@ UCLASS(Abstract, BlueprintType, meta = (DisableNativeTick))
 class UITESTPROJECT_API UWidget_ConfirmationScreen : public UWidget_ActivatableBase
 {
 	GENERATED_BODY()
+public:
+	void InitConfirmScreen(UConfirmScreenInfoObject* InConfirmScreenInfoObject, TFunction<void(EConfirmScreenButtonType)> ClickedButtonCallback);
+
+	
 private:
 	UPROPERTY(meta = (BindWidget))
 	class UCommonTextBlock* CommonTextBlock_Title;

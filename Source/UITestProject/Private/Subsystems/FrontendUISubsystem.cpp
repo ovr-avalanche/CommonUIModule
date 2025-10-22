@@ -6,7 +6,10 @@
 #include "DebugHelper.h"
 #include "Engine/AssetManager.h"
 #include "Widgets/Widget_PrimaryLayout.h"
+#include "Widgets/Widget_ConfirmationScreen.h"
 #include "Widgets/CommonActivatableWidgetContainer.h"
+#include "UIGamePlayTags.h"
+#include "FrontendFunctionLibrary.h"
 #include "Widgets/Widget_ActivatableBase.h"
 
 UFrontendUISubsystem* UFrontendUISubsystem::Get(const UObject* WorldContextObject)
@@ -48,7 +51,7 @@ void UFrontendUISubsystem::PushSoftWidgetToStackAsync(const FGameplayTag& InWidg
 	check(!InSoftWidgetClass.IsNull());
 	UAssetManager::Get().GetStreamableManager().RequestAsyncLoad(
 		InSoftWidgetClass.ToSoftObjectPath(),                      // 1. Param: asset to load
-		FStreamableDelegate::CreateLambda(                  // 2. param: Delegate called after asset is loaded
+		FStreamableDelegate::CreateLambda(                        // 2. param: Delegate called after asset is loaded
 			[InSoftWidgetClass, this, InWidgetStackTag, AsyncPushStateCallback]()
 			{
 				UClass* LoadedWidgetClass = InSoftWidgetClass.Get();
@@ -68,5 +71,42 @@ void UFrontendUISubsystem::PushSoftWidgetToStackAsync(const FGameplayTag& InWidg
 				AsyncPushStateCallback(EAsyncPushWidgetState::AfterPush, CreatedWidget);
 			}
 		)
+	);
+}
+
+void UFrontendUISubsystem::PushConfirmScreenToModalStackAsync(EConfirmScreenType InScreenType,
+	const FText& InScreenTitle, const FText& InScreenMessage,
+	TFunction<void(EConfirmScreenButtonType)> ButtonClickedCallback)
+{
+	UConfirmScreenInfoObject* CreatedInfoObject = nullptr;
+	switch (InScreenType)
+	{
+	case EConfirmScreenType::Ok:
+		CreatedInfoObject = UConfirmScreenInfoObject::CreateOKScreen(InScreenTitle, InScreenMessage);
+		break;
+	case EConfirmScreenType::YesNo:
+		CreatedInfoObject = UConfirmScreenInfoObject::CreateYesNoScreen(InScreenTitle, InScreenMessage);
+	case EConfirmScreenType::OKCancel:
+		CreatedInfoObject = UConfirmScreenInfoObject::CreateOkCancelScreen(InScreenTitle, InScreenMessage);
+		break;
+	case EConfirmScreenType::Unknown:
+		break;
+	default:
+		break;
+	}
+	check(CreatedInfoObject);
+	
+	
+	PushSoftWidgetToStackAsync(
+		UIGamePlayTags::UI_WidgetStack_Modal,			
+		UFrontendFunctionLibrary::GetFrontendSoftWidgetClassByTag(UIGamePlayTags::Frontend_Widget_ConfirmScreen),
+			[CreatedInfoObject, ButtonClickedCallback](EAsyncPushWidgetState InPushState, UWidget_ActivatableBase* PushedWidget)
+		{
+			if (InPushState == EAsyncPushWidgetState::OnCreatedBeforePush)
+			{
+				UWidget_ConfirmationScreen* CreatedConfirmScreen = CastChecked<UWidget_ConfirmationScreen>(PushedWidget);
+				CreatedConfirmScreen->InitConfirmScreen(CreatedInfoObject, ButtonClickedCallback);
+			}
+		}
 	);
 }
