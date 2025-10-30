@@ -14,6 +14,7 @@ namespace UIGamePlayTags
 	// frontend Widgets
 	UITESTPROJECT_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Frontend_Widget_PressAnyKeyScreen);
 	UITESTPROJECT_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Frontend_Widget_MainMenuScreen);
+	UITESTPROJECT_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Frontend_Widget_OptionScreen);
 	UITESTPROJECT_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Frontend_Widget_ConfirmScreen);
 
 }

@@ -40,10 +40,7 @@ bool UFrontendUISubsystem::ShouldCreateSubsystem(UObject* Outer) const
 void UFrontendUISubsystem::RegisterCreatedPrimaryLayoutWidget(UWidget_PrimaryLayout* InCreatedWidget)
 {	
 	check(InCreatedWidget);
-
 	CreatedPrimaryLayout = InCreatedWidget;
-
-	Debug::Print(TEXT("Primary layout widget stored"));
 }
 
 void UFrontendUISubsystem::PushSoftWidgetToStackAsync(const FGameplayTag& InWidgetStackTag, TSoftClassPtr<UWidget_ActivatableBase> InSoftWidgetClass, TFunction<void(EAsyncPushWidgetState, UWidget_ActivatableBase*)> AsyncPushStateCallback)
