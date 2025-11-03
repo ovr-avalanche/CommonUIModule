@@ -1,0 +1,30 @@
+// Avalanche All Rights Reserved
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "CommonTabListWidgetBase.h"
+#include "FrontendTabListWidgetBase.generated.h"
+
+class UFrontendCommonButtonBase;
+
+/**
+ * 
+ */
+UCLASS(Abstract, BlueprintType, meta = (DisableNativeTick))
+class UITESTPROJECT_API UFrontendTabListWidgetBase : public UCommonTabListWidgetBase
+{
+	GENERATED_BODY()
+
+private:
+#if WITH_EDITOR
+	virtual void ValidateCompiledDefaults(class IWidgetCompilerLog& CompileLog) const override;
+#endif
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Frontend Tab List Widget Base", meta = (AllowPrivateAccess = "true", ClampMin = "1", ClampMax = "10"))
+	int32 DebugEditorPreviewTabCount{3};
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Frontend Tab List Widget Base", meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<UFrontendCommonButtonBase> TabButtonEntryWidget;
+	
+};

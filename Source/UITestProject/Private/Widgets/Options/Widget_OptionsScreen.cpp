@@ -27,7 +27,7 @@ void UWidget_OptionsScreen::NativeOnInitialized()
 
 void UWidget_OptionsScreen::OnResetBoundActionTriggered()
 {
-	Debug::Print(TEXT("OnResetBoundActionTriggered"));
+	Debug::Print(TEXT("OnResetBoundActionTriggered11111111111"));
 }
 
 void UWidget_OptionsScreen::OnBackBoundActionTriggered()
