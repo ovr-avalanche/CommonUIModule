@@ -29,7 +29,6 @@ public:
 
 	//returns an empty array in the base class. should be overwritten to return all child data a tab has.
 	virtual TArray<UListDataObject_Base*> GetChildListData() const{return TArray<UListDataObject_Base*>();}
-	
 private:
 	FName DataID;
 	FText DataDisplayName;
