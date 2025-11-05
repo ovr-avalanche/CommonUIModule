@@ -27,8 +27,16 @@ public:
 	SETTER_GETTER(TSoftObjectPtr<UTexture2D>, SoftDescriptionImage);
 	SETTER_GETTER(UListDataObject_Base*, ParentData);
 
+	void InitDataObject(){OnDataObjectInitialized();};
+	
 	//returns an empty array in the base class. should be overwritten to return all child data a tab has.
-	virtual TArray<UListDataObject_Base*> GetChildListData() const{return TArray<UListDataObject_Base*>();}
+	virtual TArray<UListDataObject_Base*> GetAllChildListData() const{return TArray<UListDataObject_Base*>();}
+	virtual bool HasAnyChildListData() const{return false;}
+
+	
+protected:
+	virtual void OnDataObjectInitialized(){};
+	
 private:
 	FName DataID;
 	FText DataDisplayName;
