@@ -5,7 +5,14 @@
 #include "Widgets/Components/FrontendCommonButtonBase.h"
 #include "Editor/WidgetCompilerLog.h"
 
+void UFrontendTabListWidgetBase::RequestRegisterTab(const FName& InTabID, const FText& InTabDisplayName)
+{
+	
+}
+
+//=========================== Editor ===========================
 #if WITH_EDITOR
+
 void UFrontendTabListWidgetBase::ValidateCompiledDefaults(class IWidgetCompilerLog& CompileLog) const
 {
 	Super::ValidateCompiledDefaults(CompileLog);
@@ -19,3 +26,4 @@ void UFrontendTabListWidgetBase::ValidateCompiledDefaults(class IWidgetCompilerL
 	}
 }
 #endif
+//=========================== Editor ===========================
