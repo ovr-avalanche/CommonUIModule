@@ -26,6 +26,8 @@ void UWidget_OptionsScreen::NativeOnInitialized()
 	FDataTableRowHandle DefaultBackAction = ICommonInputModule::GetSettings().GetDefaultBackAction();
 	FBindUIActionArgs BackActionArgs{DefaultBackAction, true, MyBackFunc};
 	RegisterUIActionBinding(BackActionArgs);
+
+	TabListWidget_OptionTabs->OnTabSelected.AddUniqueDynamic(this, &ThisClass::OnOptionTabSelected);
 	
 }
 
@@ -58,6 +60,11 @@ void UWidget_OptionsScreen::OnResetBoundActionTriggered()
 void UWidget_OptionsScreen::OnBackBoundActionTriggered()
 {
 	DeactivateWidget();
+}
+
+void UWidget_OptionsScreen::OnOptionTabSelected(FName TabId)
+{
+	Debug::Print(TEXT("OnOptionTabSelected, TabId: ")+ TabId.ToString());
 }
 
 UOptionsDataRegistry* UWidget_OptionsScreen::GetOrCreateDataRegistry()

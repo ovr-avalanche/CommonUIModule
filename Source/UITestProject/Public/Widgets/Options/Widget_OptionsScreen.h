@@ -31,6 +31,9 @@ private:
 	void OnResetBoundActionTriggered();
 	void OnBackBoundActionTriggered();
 
+	UFUNCTION()
+	void OnOptionTabSelected(FName TabId);
+	
 	//---Bound Widget---
 	UPROPERTY(meta= (BindWidget))
 	UFrontendTabListWidgetBase* TabListWidget_OptionTabs;
